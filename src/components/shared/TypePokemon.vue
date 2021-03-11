@@ -4,10 +4,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      typePokemon: 'normal',
-    };
+  props: {
+    typePokemon: {
+      type: String,
+      default: 'normal',
+    },
   },
   name: 'TypePokemon',
 };

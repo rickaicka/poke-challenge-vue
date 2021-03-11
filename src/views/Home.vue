@@ -4,7 +4,30 @@
       <div class="row">
           <div class="col-md-12">
               <ul class="pokedex-list ml-0 mr-0 pl-2 pr-0">
-                <li class="pokedex-list__item mb-4">
+                <li class="pokedex-list__item mb-4" v-for="pok in pokemons.results" :key="pok.id">
+                    <md-card class="pokedex-list__item__card-pokemon mr-2 px-0 pb-3 pt-2">
+                        <div class="pokedex-list__item__card-pokemon__header px-3">
+                            <h3>{{pok.name}}</h3>
+                            <TypePokemon v-for="type in pok.types" :key="type.type.name" :typePokemon="type.type.name" />
+                        </div>
+                        <div class="pokedex-list__item__card-pokemon__image">
+                            <md-card-media>
+                                <img v-bind:src="pok.sprite">
+                            </md-card-media>
+                        </div>
+                        <md-card-content class="pokedex-list__item__card-pokemon__content">
+                            <p class="text-center">
+                                <span>#</span>  {{pok.id | numeral('000')}}
+                            </p>
+                        </md-card-content>
+                        <div class="pokedex-list__item__card-pokemon__details">
+                            <md-button class="md-fab md-mini md-plain">
+                                <md-icon>loupe</md-icon>
+                            </md-button>
+                          </div>
+                    </md-card> 
+                </li>
+                <!-- <li class="pokedex-list__item mb-4">
                     <md-card class="pokedex-list__item__card-pokemon mr-2 px-0 pb-3 pt-2">
                         <div class="pokedex-list__item__card-pokemon__header px-3">
                             <h3>Teste</h3>
@@ -95,30 +118,7 @@
                             </md-button>
                           </div>
                     </md-card> 
-                </li>
-                <li class="pokedex-list__item mb-4">
-                    <md-card class="pokedex-list__item__card-pokemon mr-2 px-0 pb-3 pt-2">
-                        <div class="pokedex-list__item__card-pokemon__header px-3">
-                            <h3>Teste</h3>
-                            <TypePokemon />
-                        </div>
-                        <div class="pokedex-list__item__card-pokemon__image">
-                            <md-card-media>
-                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png">
-                            </md-card-media>
-                        </div>
-                        <md-card-content class="pokedex-list__item__card-pokemon__content">
-                            <p class="text-center">
-                                <span>#</span> 123
-                            </p>
-                        </md-card-content>
-                        <div class="pokedex-list__item__card-pokemon__details">
-                            <md-button class="md-fab md-mini md-plain">
-                                <md-icon>loupe</md-icon>
-                            </md-button>
-                          </div>
-                    </md-card> 
-                </li>
+                </li> -->
             </ul>
 
           </div>
@@ -143,6 +143,37 @@
 import TypePokemon from "@/components/shared/TypePokemon.vue"
 
 export default {
+  data () {
+    return {
+        pokemons: []
+    }
+  },
+  methods: {
+      getPokemons(){
+          this.$http('/pokemon/?&offset=0&limit=50').then(res => {
+              res.data.results.forEach(element => {
+                  this.$http('/pokemon/' + element.name).then(e =>{
+                      element.sprite = this.filterSprites(e.data.sprites)
+                      element.id = e.data.id;
+                      element.types = e.data.types;
+                  })
+              });
+              this.pokemons = res.data;
+          })
+      },
+      filterSprites(sprites){
+        let filteredSprite = '';
+        Object.keys(sprites).forEach(function(k){
+            if(k == 'front_default'){
+                filteredSprite = sprites[k];
+            }
+        });
+        return filteredSprite;
+      }
+  },
+  beforeMount() {
+    this.getPokemons();  
+  },
   name: 'Home',
   components: {
       TypePokemon
