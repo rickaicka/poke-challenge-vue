@@ -1,0 +1,194 @@
+<template>
+  <!-- eslint-disable vue/no-v-html -->
+  <div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-12 container-pokemon-detail__back">
+            <a class=" float-left">
+                <md-icon>loupe</md-icon> Pokedex 
+            </a> 
+            <!-- <i class="pt-1 float-left ml-2" [ngClass]="pokemon?.typeClass"> - </i>
+            <p [ngClass]="pokemon?.typeClass" class="pt-1 float-left ml-2"> {{pokemon?.name}}</p> -->
+        </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+/* eslint-disable */
+import TypePokemon from "@/components/shared/TypePokemon.vue";
+
+export default {
+  props: ['name'],
+  name: 'Pokemon',
+};
+
+</script>
+
+<style lang="scss" scoped>
+
+/* eslint-disable no-trailing-spaces  */
+@import '@/assets/sass/base/functions';
+
+.mat-tab-label-content{
+    @include textStyle(20px!important, $second-gray!important, 400!important, capitalize!important);
+}
+.simplebar-wrapper{
+    height: 60vh!important;
+    @media screen and (min-width: $mqDesk) {
+        height: 16vw!important;
+    }
+}
+.simplebar-scrollbar:before{
+    background: unset!important;
+}
+.scrollbar-pokedex{    
+    border-radius: 7px;
+    width: 50%;
+    margin: 0 auto;
+    opacity: .7;
+}
+.container-pokemon-detail{
+    width: 100%;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    min-height: 95vh;
+    padding: 16px;
+    &__back{
+        & a{
+            @include textStyle(16px, $primary-gray, 500, capitalize, true);
+            &:hover{
+                @include textStyle(16px, $primary-gray, 500, capitalize, true);
+                text-decoration: underline;
+            }
+            & i{
+                font-size: 22px;
+            }
+        }
+        & p{
+            @include textStyle(16px, $primary-gray, 500, capitalize, true);
+        }
+    }
+    &__img{
+        & img{
+            width: 100%;
+        }
+    }
+    &__name-type{
+        & h2{
+            @include textStyle(24px, $second-gray, 500, capitalize);
+        }
+        &__type{
+            width: 100%;
+        }
+        &__infos{
+            display: flex;
+            flex-flow: column wrap;
+            &__number{
+                @include textStyle(14px, $second-gray, 400, capitalize);
+                & i{
+                    @include textStyle(10px, $second-gray, 400, capitalize);
+                    font-style: normal;
+                }
+            }
+            &__weight-height{
+                @include textStyle(12px, $second-gray, 400, none);
+                @media screen and (max-width: $mobile) {
+                    @include textStyle(14px, $second-gray, 400, none); 
+                }
+            }
+        }
+    }
+    &__tabs{
+        &__abilities, &__moves, &__stats{
+            & ul{
+                display: flex;
+                flex-flow: column nowrap;
+                & li{
+                    width: 100%;
+                    transition: all 0.5s ease;
+                    cursor: pointer;
+                    & p{
+                        @include textStyle(16px, $second-gray, 400, capitalize);
+                        & span{
+                            @include textStyle(16px, $second-gray, 500, capitalize);
+                        }
+                    }
+                    & i{
+                        font-size: 18px;
+                    }
+                    &:hover{
+                        background-color: rgba($primary-gray, .6) ;
+                    }
+                }
+            }
+        }
+        &__stats{
+            &__list{
+                &__item{
+                    border: transparent;
+                }
+            }
+        }
+    }
+    &__infos{
+        width: 100%;
+        height: 60vh!important;
+        @media screen and (min-width: $mqDesk) {
+            height: 16vw!important;
+        }
+        .mat-expansion-panel-header{
+            &-title{
+                @include textStyle(16px, $second-gray, 500, capitalize);
+            }
+        }
+        .mat-expansion-panel-header-title{
+            flex-grow: unset;
+            padding-top: 12px;
+        }
+        .mat-expansion-panel-body{
+            & p{
+                @include textStyle(14px, $second-gray, 400, none); 
+            }
+            & .move-ability-name{
+                @include textStyle(14px, $second-gray, 500, capitalize);
+                margin: 0;
+            }
+        }
+
+        &__header{
+            & h3 {
+                @include textStyle(16px, $second-gray, 500, capitalize);
+            }
+        }
+        &__stats{
+            &__list{
+                &__item{
+                    & .title{
+                        @include textStyle(16px, $second-gray, 500, capitalize);  
+                    }
+                    & .content{
+                        @include textStyle(14px, $second-gray, 400, none);  
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+    &__flavor-text{
+        & h2{
+            @include textStyle(22px, $second-gray, 500, capitalize);
+            margin: 0;
+        }
+        & p{
+            @include textStyle(16px, $second-gray, 300, none); 
+            @media screen and (max-width: $mobile) {
+                @include textStyle(14px, $second-gray, 400, none); 
+            }
+        }
+    }
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <span class="type-pk" v-bind:class="typePokemon">{{typePokemon}}</span>
+    <span class="type-pk" :class="typePokemon">{{typePokemon}}</span>
 </template>
 
 <script>
