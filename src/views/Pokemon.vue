@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-md-10 container-pokemon-detail__tabs mt-3">
-                <md-tabs md-alignment="left" md-swipeable>
+                <md-tabs md-alignment="fixed" md-swipeable>
                     <md-tab id="tab-stats" class="pl-0" md-label="Stats"> 
                         <div class="container-pokemon-detail__tabs__stats pt-2">
                             <ul class="container-pokemon-detail__tabs__stats__list list-group">
@@ -49,6 +49,52 @@
                             </ul>
                         </div>
                     </md-tab>
+                    <!-- <md-tab id="tab-moves" md-label="Moves"> 
+                        <div class="container-pokemon-detail__tabs__moves">
+                                <div class="container-pokemon-detail__infos float-left">
+                                    <md-list :md-expand-single="'true'">                                        
+                                        <md-list-item md-expand v-for="move in pokemonDetail.moves" :key="move.id">
+                                            <p class="md-list-item-text" v-on:click="getMoveDetails(move)">
+                                                {{move.move.name}}
+                                            </p>
+                                            <md-list slot="md-expand">
+                                                <md-list-item class="md-inset">
+                                                    <div class="container-pokemon-detail__infos__stats">
+                                                        <ul class="container-pokemon-detail__infos__stats__list">
+                                                            <li class="container-pokemon-detail__infos__stats__list__item">
+                                                                <span class="title">Type: </span>
+                                                                <TypePokemon v-for="type in pokemonDetail.types" :key="move.move.id" :typePokemon="type.type.name" />
+                                                            </li>
+                                                            <li class="container-pokemon-detail__infos__stats__list__item mt-2">                                
+                                                                <span class="title">Description: </span>
+                                                                <p class="content">{{tabsDetail.moveDetails.flavor_text}} </p>
+                                                            </li>
+                                                            <li class="container-pokemon-detail__infos__stats__list__item mt-2">                                
+                                                                <span class="title">Effect: </span>
+                                                                <p class="content">{{tabsDetail.moveDetails.effect}}</p>
+                                                            </li>
+                                                            <li class="container-pokemon-detail__infos__stats__list__item mt-2">
+                                                                <span class="title">Accuracy: </span>
+                                                                <p class="content">{{move?.move?.moveDetails?.accuracy}}</p>
+                                                            </li>
+                                                            <li class="container-pokemon-detail__infos__stats__list__item mt-2">
+                                                                <span class="title">Power: </span>
+                                                                <p class="content">{{ move?.move?.moveDetails?.power}}</p>
+                                                            </li>
+                                                            <li class="container-pokemon-detail__infos__stats__list__item mt-2">
+                                                                <span class="title">PP: </span>
+                                                                <p class="content">{{move?.move?.moveDetails?.pp}}</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </md-list-item>
+                                            </md-list>
+                                        </md-list-item>
+                                    </md-list>
+                                </div>
+                            </div>
+                        
+                    </md-tab> -->
                 </md-tabs>
             </div>
         </div>
@@ -69,7 +115,7 @@ export default {
         return this.$store.state.pokemonDetail;
     },
     tabsDetail() {
-        return storeBase.state.tabsDetails;
+        return this.$store.state.tabsDetails;
     }
   },
   methods: {
