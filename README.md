@@ -1,24 +1,19 @@
-# poke-challenge-vue
+# Poke-Challenge-Vue
 
-## Project setup
-```
-npm install
-```
+Para rodar o projeto, baixar o repositório,
+acessar via cmd a pasta e rodar os seguintes comandos:
 
-### Compiles and hot-reloads for development
 ```
-npm run serve
-```
+- npm install (para instalar as dependências do Node);
+- nnpm run serve;
 
-### Compiles and minifies for production
 ```
-npm run build
-```
+O projeto local rodará na url: http://localhost:8080/
 
-### Lints and fixes files
-```
-npm run lint
-```
+Tecnologias usadas:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+>- HTML5 e SASS;
+>- Vue Material;
+>- VueJs;
+>- VueX;
+>- Vue Router
