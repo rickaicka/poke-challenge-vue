@@ -6,7 +6,7 @@
               <CardPokemon :cardPokemon="pokemons"/>
           </div>
       </div>
-      <div class="row d-block">
+      <div class="row d-md-none d-block">
           <div class="col-md-12 col-5 offset-4">
               <div>
                   <button class="btn-renew-pokedex-icon">
@@ -32,7 +32,7 @@ export default {
     pokemons() {
 		let reorderedPokemons = this.$store.state.pokemons.listPokemons;
         reorderedPokemons = reorderedPokemons.sort((a,b) => {
-            return a?.order - b?.order;
+            return a?.id - b?.id;
         });
         return reorderedPokemons;
     }
@@ -52,7 +52,20 @@ export default {
                 store.commit('getDetailsPokemon', dt);         
               };
         });
-      }
+    },
+    scroll() {          
+    const _store = this.$store;
+    const _this = this;
+    window.onscroll = function(ev) {
+        
+        let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+        let max = document.documentElement.scrollHeight;
+        const uA = navigator.userAgent;
+        if (_store.state.pokemons.listPokemons.length > 0 && (pos == max) && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(uA))) {
+            _this.getPokemons(_store.state.pokemons.next);
+        }
+    };
+    }
   },
   mounted(){
     const _store = this.$store;
@@ -60,7 +73,11 @@ export default {
     if(_store.state.pokemons.listPokemons.length == 0){
         _this.getPokemons();         
     }
+    window.addEventListener('scroll', _this.scroll);
   },
+    beforeDestroy() {
+        window.removeEventListener("scroll", this.onScroll)
+    },
   name: 'Home',
   components: {
       CardPokemon
@@ -88,5 +105,4 @@ export default {
         margin-bottom: 10px;
     }
 }
-
 </style>

@@ -59,8 +59,8 @@ $statsColor: (
 }
 
 @each $name, $color in $statsColor{
-    .mat-type-stats-#{$name}{
-        .mat-progress-bar-fill::after {
+    .md-determinate-type-stats-#{$name}{
+        .md-progress-bar-fill {
             background-color: $color !important;
         }
     }

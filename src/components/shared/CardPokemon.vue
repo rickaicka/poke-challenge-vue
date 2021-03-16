@@ -1,6 +1,6 @@
 <template>
     <ul class="pokedex-list ml-0 mr-0 pl-2 pr-0">
-        <li class="pokedex-list__item mb-4" v-for="pok in cardPokemon" :key="(pok.id + pok.order)">
+        <li class="pokedex-list__item mb-4" v-for="pok in cardPokemon" :key="pok.id ">
             <router-link :to="'/pokemon/' + pok.name">
                 <md-card class="pokedex-list__item__card-pokemon mr-2 px-0 pb-3 pt-2">
                     <div class="pokedex-list__item__card-pokemon__header px-3">
@@ -112,5 +112,9 @@ export default {
             }
         }
     }
+}
+
+a:not(.md-button):hover {
+    text-decoration: none;
 }
 </style>
